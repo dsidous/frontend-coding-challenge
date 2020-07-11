@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import theme from '../../../theme';
 import Tournament from '../../molecules/Tournament';
 import Loading from '../../atoms/Loading';
+import Error from '../../atoms/Error';
 
 const StyledDiv = styled.div`
   display: grid;
@@ -13,7 +14,7 @@ const StyledDiv = styled.div`
 
 const TournamentList = ({ data }) => {
   if (data.error) {
-    return <div>Something went wrong.</div>;
+    return <Error />;
   }
 
   if (data.loading) {
