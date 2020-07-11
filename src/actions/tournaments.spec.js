@@ -1,6 +1,11 @@
 import moxios from 'moxios';
 import { testStore } from '../utils';
-import { fetchTournaments, createTournament } from './tournaments';
+import {
+  fetchTournaments,
+  createTournament,
+  updateTournament,
+  deleteTournament
+} from './tournaments';
 import { types } from './types';
 
 describe('Tournaments actions', () => {
@@ -60,5 +65,68 @@ describe('Tournaments actions', () => {
     });
   });
 
-  it('Should create a new tournament', () => {});
+  it('Should create a new tournament', () => {
+    let req;
+    const newName = 'New Name';
+
+    moxios.wait(() => {
+      req = moxios.requests.mostRecent();
+      req.respondWith({
+        status: 200,
+        response: newName
+      });
+    });
+
+    return store.dispatch(createTournament(newName)).then(() => {
+      const actions = store.getActions();
+
+      expect(req.config.method).toBe('post');
+      expect(req.config.data).toEqual(JSON.stringify({ name: newName }));
+
+      expect(actions).toEqual([{ type: types.FETCH_TOURNAMENTS }]);
+    });
+  });
+
+  it('Should update a tournament', () => {
+    let req;
+    const newName = 'New Name';
+    const id = 'fakeid';
+
+    moxios.wait(() => {
+      req = moxios.requests.mostRecent();
+      req.respondWith({
+        status: 200,
+        response: newName
+      });
+    });
+
+    return store.dispatch(updateTournament(id, newName)).then(() => {
+      const actions = store.getActions();
+
+      expect(req.config.method).toBe('patch');
+      expect(req.config.data).toEqual(JSON.stringify({ name: newName }));
+
+      expect(actions).toEqual([{ type: types.FETCH_TOURNAMENTS }]);
+    });
+  });
+
+  it('Should delete a tournament', () => {
+    let req;
+    const id = 'fakeid';
+
+    moxios.wait(() => {
+      req = moxios.requests.mostRecent();
+      req.respondWith({
+        status: 200,
+        response: id
+      });
+    });
+
+    return store.dispatch(deleteTournament(id)).then(() => {
+      const actions = store.getActions();
+      expect(req.config.method).toBe('delete');
+
+      expect(actions).toEqual([{ type: types.FETCH_TOURNAMENTS }]);
+    });
+  });
 });
