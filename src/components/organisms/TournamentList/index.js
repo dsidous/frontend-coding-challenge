@@ -1,4 +1,5 @@
 import React from 'react';
+import { array, bool, shape, oneOfType } from 'prop-types';
 import styled from 'styled-components';
 
 import theme from '../../../theme';
@@ -32,3 +33,14 @@ const TournamentList = ({ data }) => {
 };
 
 export default TournamentList;
+
+TournamentList.propTypes = {
+  data: oneOfType([
+    shape({
+      tournaments: array,
+      loading: bool,
+      error: bool
+    }),
+    array
+  ])
+};

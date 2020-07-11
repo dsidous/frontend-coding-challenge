@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { number, shape, string } from 'prop-types';
 import styled from 'styled-components';
 
 import {
@@ -80,3 +81,17 @@ const Tournament = ({
 };
 
 export default Tournament;
+
+Tournament.propTypes = {
+  tournament: shape({
+    id: string,
+    name: string,
+    organizer: string,
+    game: string,
+    participants: shape({
+      current: number,
+      max: number
+    }),
+    startDate: string
+  })
+};
