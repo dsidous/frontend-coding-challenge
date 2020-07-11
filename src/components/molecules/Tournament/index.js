@@ -59,7 +59,9 @@ const Tournament = ({
         <ButtonEdit
           onClick={() => {
             const newName = window.prompt('New Tournament Name:', name);
-            dispatch(updateTournament(id, newName));
+            if (newName) {
+              dispatch(updateTournament(id, newName));
+            }
           }}
         >
           Edit
