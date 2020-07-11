@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import theme from '../../../theme';
 import Tournament from '../../molecules/Tournament';
+import Loading from '../../atoms/Loading';
 
 const StyledDiv = styled.div`
   display: grid;
@@ -15,7 +17,7 @@ const TournamentList = ({ data }) => {
   }
 
   if (data.loading) {
-    return <div>Lodaing tournaments...</div>;
+    return <Loading />;
   }
 
   return (
