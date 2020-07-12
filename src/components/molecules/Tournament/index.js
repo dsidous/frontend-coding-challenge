@@ -58,6 +58,7 @@ const Tournament = ({
       </List>
       <div>
         <ButtonEdit
+          data-test="buttonEdit"
           onClick={() => {
             const newName = window.prompt('New Tournament Name:', name);
             if (newName) {
@@ -68,6 +69,7 @@ const Tournament = ({
           Edit
         </ButtonEdit>
         <Button
+          data-test="buttonDelete"
           onClick={() =>
             window.confirm('Do you really want to delete this tournament?') &&
             dispatch(deleteTournament(id))

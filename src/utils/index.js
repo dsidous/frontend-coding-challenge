@@ -11,3 +11,8 @@ export const testStoreState = initialState => {
 };
 
 export const testStore = configureStore(middlewares);
+
+export const findByTestAtrr = (component, attr) => {
+  const wrapper = component.find(`[data-test='${attr}']`);
+  return wrapper;
+};
