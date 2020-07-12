@@ -20,7 +20,8 @@ const StyledContainer = styled.div`
 `;
 
 const App = () => {
-  const [query, setQuery] = useState(null);
+  const [query, setQuery] = useState('');
+
   const data = useSelector(state => getTournaments(state));
   const dispatch = useDispatch();
 
@@ -45,13 +46,17 @@ const App = () => {
       <H4>FACEIT Tournaments</H4>
       <Container>
         <StyledContainer>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} data-test="searchForm">
             <Input
+              data-test="searchInput"
               placeholder="Search tournament..."
               onChange={e => setQuery(e.target.value)}
+              value={query}
             />
           </form>
-          <Button onClick={newTournament}>Create Tournament</Button>
+          <Button data-test="buttonCreate" onClick={newTournament}>
+            Create Tournament
+          </Button>
         </StyledContainer>
         <TournamentList data={data} />
       </Container>
