@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 import TournamentList from './';
@@ -50,15 +50,15 @@ describe('TournamentList', () => {
 
   it('Should show the loading screen', () => {
     data.loading = true;
-    const { getByText } = render(<TournamentList {...{ data }} />);
+    render(<TournamentList {...{ data }} />);
 
-    expect(getByText('Loading Tournaments...')).toBeTruthy();
+    expect(screen.getByText('Loading Tournaments...')).toBeTruthy();
   });
 
   it('Should show the error screen', () => {
     data.error = true;
-    const { getByText } = render(<TournamentList {...{ data }} />);
+    render(<TournamentList {...{ data }} />);
 
-    expect(getByText('Something went wrong')).toBeTruthy();
+    expect(screen.getByText('Something went wrong')).toBeTruthy();
   });
 });

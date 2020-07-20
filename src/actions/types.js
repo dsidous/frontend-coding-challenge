@@ -9,5 +9,11 @@ export const types = {
   DELETE_TOURNAMENT: 'deleteTournament',
   DELETE_TOURNAMENT_ERROR: 'deleteTournamentError',
 
+  CREATE_TOURNAMENT: 'createTournament',
+
+  EDIT_TOURNAMENT: 'editTournament',
+
+  DELETE_TOURNAMENT: 'deleteTournament',
+
   QUERY: 'query'
 };

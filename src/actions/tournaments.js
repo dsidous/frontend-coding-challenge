@@ -26,8 +26,11 @@ export const fetchTournaments = () => async (dispatch, getState) => {
 
 export const createTournament = newName => async dispatch => {
   try {
-    await axios.post(`${API_TOURNAMENTS_URL}`, { name: newName });
-    dispatch(fetchTournaments());
+    const res = await axios.post(`${API_TOURNAMENTS_URL}`, { name: newName });
+    dispatch({
+      type: types.CREATE_TOURNAMENT,
+      payload: res.data
+    });
   } catch (error) {
     dispatch({
       type: types.CREATE_TOURNAMENT_ERROR
@@ -37,8 +40,13 @@ export const createTournament = newName => async dispatch => {
 
 export const updateTournament = (id, newName) => async dispatch => {
   try {
-    await axios.patch(`${API_TOURNAMENTS_URL}/${id}`, { name: newName });
-    dispatch(fetchTournaments());
+    const res = await axios.patch(`${API_TOURNAMENTS_URL}/${id}`, {
+      name: newName
+    });
+    dispatch({
+      type: types.EDIT_TOURNAMENT,
+      payload: res.data
+    });
   } catch (error) {
     dispatch({
       type: types.UPDATE_TOURNAMENT_ERROR
@@ -49,7 +57,10 @@ export const updateTournament = (id, newName) => async dispatch => {
 export const deleteTournament = id => async dispatch => {
   try {
     await axios.delete(`${API_TOURNAMENTS_URL}/${id}`);
-    dispatch(fetchTournaments());
+    dispatch({
+      type: types.DELETE_TOURNAMENT,
+      payload: id
+    });
   } catch (error) {
     dispatch({
       type: types.DELETE_TOURNAMENT_ERROR
